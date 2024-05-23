@@ -7,5 +7,8 @@
 ## Changes in the codebase
 *Focus on the engineering side of your solution. Include information about the functionality they are adding or modifying, as well as any refactoring or improvement of existing code.*
 
+## Juxtaposition
+*Compare and contrast. It could be about the PR's performance metrics vs old one.*
+
 ## Aditional information
 *This could include performance considerations, module changes, etc.*
