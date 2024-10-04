@@ -10,8 +10,8 @@ class DenseLayer(nn.Module):
     def forward(self, x):
         # Pass the input through the dense layer
         x = self.fc(x)
-        # Apply the sigmoid activation function
-        x = torch.sigmoid(x)
+        # Apply the sigmoid activation function !!!DONT USE WITH BCEWithLogits!!!
+        # x = torch.sigmoid(x)
         return x
     
 class BCELoss(nn.Module):
@@ -24,6 +24,16 @@ class BCELoss(nn.Module):
         # Compute and return the binary cross-entropy loss
         return self.bce_loss(output, target)
     
+class BCEWithLogits(nn.Module):
+    def __init__(self):
+        super(BCEWithLogits, self).__init__()
+        # Initialize BCEWithLogitsLoss, which combines Sigmoid + BCELoss
+        self.bce_loss = nn.BCEWithLogitsLoss()
+
+    def forward(self, output, target):
+        # Compute and return the binary cross-entropy loss with logits
+        return self.bce_loss(output, target)
+
 class CustomLoss(nn.Module):
     def __init__(self, weight_bce=0.5, weight_f1=0.5):
         super(CustomLoss, self).__init__()
