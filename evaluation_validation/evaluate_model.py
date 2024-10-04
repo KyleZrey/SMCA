@@ -73,8 +73,6 @@ def evaluate_model(model, dense_layer, dataloader, criterion, device):
     f1_score = f1_metric.compute().item()
 
     average_loss = total_loss / len(dataloader)
-
-    print(f"Evaluation Loss: {average_loss:.4f}")
     print(f"Precision: {precision:.4f}")
     print(f"Recall: {recall:.4f}")
     print(f"F1 Score: {f1_score:.4f}")

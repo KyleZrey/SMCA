@@ -21,7 +21,12 @@ def test_model(model, dense_layer, dataloader, criterion, device):
             )
             
             # Pass inputs through SMCA model
-            outputs = model(modalityAlpha=text_features.to(device), modalityBeta=audio_features.to(device), modalityGamma=video_features.to(device), device=device)
+            outputs = model(modalityAlpha=text_features, modalityBeta=audio_features, modalityGamma=video_features, device=device)
+            # outputs = model(modalityAlpha=text_features, modalityBeta=video_features, modalityGamma=audio_features, device=device)
+            # outputs = model(modalityAlpha=audio_features, modalityBeta=text_features, modalityGamma=video_features, device=device)
+            # outputs = model(modalityAlpha=audio_features, modalityBeta=video_features, modalityGamma=text_features, device=device)
+            # outputs = model(modalityAlpha=video_features, modalityBeta=audio_features, modalityGamma=text_features, device=device)
+            # outputs = model(modalityAlpha=video_features, modalityBeta=text_features, modalityGamma=audio_features, device=device)
 
             # Check if padding is necessary
             output_size = outputs.size(1)
