@@ -42,7 +42,7 @@ def test_model(model, dense_layer, dataloader, criterion, device):
                 outputs = outputs[:, :dense_input_size]
 
             # Pass the fused features through the dense layer
-            predictions = torch.sigmoid(dense_layer(outputs)).view(-1)  
+            predictions = dense_layer(outputs).view(-1)  
             
             # Compute loss
             loss = criterion(predictions, targets)
