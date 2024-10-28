@@ -1,1 +1,7 @@
 /.venv
+
+/misc/audio_fe
+
+/misc/textStream_BERT
+
+/misc/visualStream_ViT
