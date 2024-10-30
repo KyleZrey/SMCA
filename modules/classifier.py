@@ -11,7 +11,7 @@ class DenseLayer(nn.Module):
         # Pass the input through the dense layer
         x = self.fc(x)
         # Apply the sigmoid activation function !!!DONT USE WITH BCEWithLogits!!!
-        # x = torch.sigmoid(x)
+        x = torch.sigmoid(x)
         return x
     
 class BCELoss(nn.Module):
