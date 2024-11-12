@@ -61,6 +61,33 @@ class CustomLoss(nn.Module):
         # Return the mean of the weighted loss
         return weighted_loss.mean()
 
+class FocalLoss(nn.Module):
+    def __init__(self, alpha=1.0, gamma=2.0, pos_weight=None):
+        super(FocalLoss, self).__init__()
+        self.alpha = alpha          # Scaling factor for the loss of the positive class
+        self.gamma = gamma          # Focusing parameter for reducing loss from well-classified examples
+        self.pos_weight = pos_weight  # Weight for the positive class, optional
+
+    def forward(self, output, target):
+        # Apply sigmoid to the output to get probabilities if logits are provided
+        if output.shape[-1] == 1:  # Check if it's single-output (binary classification)
+            output = torch.sigmoid(output)
+        
+        # Calculate binary cross-entropy loss
+        bce_loss = F.binary_cross_entropy(output, target, reduction='none')
+
+        # Compute the focal loss term: alpha * (1 - p_t)^gamma
+        pt = torch.where(target == 1, output, 1 - output)  # p_t is output if target=1 else 1 - output
+        focal_loss = self.alpha * (1 - pt) ** self.gamma * bce_loss
+
+        # Apply pos_weight if specified
+        if self.pos_weight is not None:
+            weights = torch.where(target == 1, self.pos_weight, 1.0)
+            focal_loss *= weights
+        
+        # Return mean of the focal loss
+        return focal_loss.mean()
+
 # # Example usage:
 # input_size = 5
 # model = DenseLayer(input_size)
