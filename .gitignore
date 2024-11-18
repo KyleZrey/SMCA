@@ -5,3 +5,6 @@
 /misc/textStream_BERT/
 
 /misc/visualStream_ViT/
+/misc
+
+.DS_Store
